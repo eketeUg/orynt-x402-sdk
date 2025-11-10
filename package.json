@@ -1,0 +1,41 @@
+{
+  "name": "@orynt/ai-x402",
+  "version": "1.0.0",
+  "main": "dist/index.cjs",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build",
+    "build": "tsup src/index.ts --format esm,cjs --dts"
+  },
+  "keywords": [
+    "x402",
+    "AI",
+    "OpenAI",
+    "Anthropic",
+    "Grok",
+    "Gradient",
+    "embeddings",
+    "chat",
+    "TTS",
+    "STT",
+    "images"
+  ],
+  "author": "Emmanuel Ekete",
+  "license": "MIT",
+  "description": "AI model wrapper using x402 payment for pay per request",
+  "dependencies": {
+    "cross-fetch": "^4.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  }
+}
