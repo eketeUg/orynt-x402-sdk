@@ -14,7 +14,11 @@ import {
 } from "./types";
 
 export class Orynt {
-  constructor(private config: { baseUrl: string; apiKey?: string }) {}
+  /**
+   * @param config.baseUrl Base URL of the gateway
+   * @param config.network Optional blockchain network: "solana-mainnet" | "solana-devnet" | "base-sepolia" | "base";
+   */
+  constructor(private config: { baseUrl: string; network?: string }) {}
 
   private async request<TResponse>(
     path: string,
@@ -22,12 +26,6 @@ export class Orynt {
   ): Promise<TResponse> {
     const res = await fetch(`${this.config.baseUrl}${path}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(this.config.apiKey
-          ? { Authorization: `Bearer ${this.config.apiKey}` }
-          : {}),
-      },
       body: JSON.stringify(body),
     });
 
