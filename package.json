@@ -30,13 +30,18 @@
     "STT",
     "images"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eketeUg/orynt-x402-sdk"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Emmanuel Ekete",
   "license": "MIT",
   "description": "AI model wrapper using x402 payment for pay per request",
   "dependencies": {
-    "bs58": "^6.0.0",
     "cross-fetch": "^4.1.0",
-    "viem": "^2.38.6",
     "x402-fetch": "^0.7.0"
   },
   "devDependencies": {

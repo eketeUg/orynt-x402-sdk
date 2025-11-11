@@ -4,7 +4,7 @@ A lightweight, ai model-agnostic client providing unified access to AI models. W
 
 ---
 
-## ✨ Features
+## Features
 
 - ✅ **Pay-As-You-Use** – Built-in HTTPS-x402 micropayments using USDC, so you only pay for what you consume.
 - ✅ **model-Agnostic** - Interact with multiple AI models through a single unified API

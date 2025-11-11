@@ -1,8 +1,5 @@
 import fetch from "cross-fetch";
 import { wrapFetchWithPayment, createSigner } from "x402-fetch";
-import { createWalletClient, http } from "viem";
-import { baseSepolia, base } from "viem/chains";
-import { privateKeyToAccount } from "viem/accounts";
 import {
   ChatRequest,
   ChatResponse,
