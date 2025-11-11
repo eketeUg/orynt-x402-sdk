@@ -60,7 +60,7 @@ provide a PRIVATE_KEY=...walletPrivate in your .env
 import { Orynt } from "@orynt/ai-x402";
 
 const ai = new Orynt({
-  baseUrl: "http://localhost:3000/api/v1",
+  baseUrl: "https://api.oryntai.xyz/api/v1",
   network: "solana-devnet",
 });
 
