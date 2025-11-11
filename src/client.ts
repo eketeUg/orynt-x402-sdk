@@ -17,7 +17,6 @@ import { SupportedNetwork } from "./networks";
 
 export class Orynt {
   private paidFetch: any;
-  private signer: any;
 
   /**
    * @param config.baseUrl Base URL of the gateway
