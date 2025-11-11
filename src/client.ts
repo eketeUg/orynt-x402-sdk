@@ -1,4 +1,8 @@
 import fetch from "cross-fetch";
+import { wrapFetchWithPayment, createSigner } from "x402-fetch";
+import { createWalletClient, http } from "viem";
+import { baseSepolia, base } from "viem/chains";
+import { privateKeyToAccount } from "viem/accounts";
 import {
   ChatRequest,
   ChatResponse,
@@ -12,21 +16,39 @@ import {
   TtsResponse,
   ModelInfo,
 } from "./types";
+import { SupportedNetwork } from "./networks";
 
 export class Orynt {
+  private paidFetch: any;
+  private signer: any;
+
   /**
    * @param config.baseUrl Base URL of the gateway
    * @param config.network Optional blockchain network: "solana-mainnet" | "solana-devnet" | "base-sepolia" | "base";
    */
-  constructor(private config: { baseUrl: string; network?: string }) {}
+  constructor(private config: { baseUrl: string; network: SupportedNetwork }) {
+    const privateKey = process.env.PRIVATE_KEY;
+
+    if (!privateKey) {
+      throw new Error(`Missing PRIVATE_KEY in environment variables.`);
+    }
+
+    createSigner(this.config.network, privateKey).then((signer) => {
+      this.paidFetch = wrapFetchWithPayment(fetch, signer);
+    });
+  }
 
   private async request<TResponse>(
     path: string,
     body: any
   ): Promise<TResponse> {
-    const res = await fetch(`${this.config.baseUrl}${path}`, {
+    const res = await this.paidFetch(`${this.config.baseUrl}${path}`, {
       method: "POST",
       body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        "X-Network": this.config.network,
+      },
     });
 
     if (!res.ok) {
@@ -52,7 +74,7 @@ export class Orynt {
     return await this.request("/ai/stt", params);
   }
 
-  async speechToText(params: TtsRequest): Promise<TtsResponse> {
+  async textToSpeech(params: TtsRequest): Promise<TtsResponse> {
     return await this.request("/ai/tts", params);
   }
 

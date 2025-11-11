@@ -14,7 +14,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm run build",
-    "build": "tsup src/index.ts --format esm,cjs --dts"
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "publish:clean": "rm -rf dist && npm run build && npm publish --access public"
   },
   "keywords": [
     "x402",
@@ -33,7 +34,10 @@
   "license": "MIT",
   "description": "AI model wrapper using x402 payment for pay per request",
   "dependencies": {
-    "cross-fetch": "^4.1.0"
+    "bs58": "^6.0.0",
+    "cross-fetch": "^4.1.0",
+    "viem": "^2.38.6",
+    "x402-fetch": "^0.7.0"
   },
   "devDependencies": {
     "tsup": "^8.5.0",

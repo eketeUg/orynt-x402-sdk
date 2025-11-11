@@ -50,6 +50,8 @@ export interface ImageRequest {
   prompt: string;
   n?: number;
   size?: string;
+  width?: number;
+  height?: number;
   options?: Record<string, any>;
 }
 
